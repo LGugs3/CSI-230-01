@@ -10,6 +10,7 @@
 
 
 #Deliverable 4
+<#
 $chromeExe = "C:\Program Files\Google\Chrome\Application\chrome.exe"
 $service = Get-Process | Where-Object {$_.Name -ilike "*chrome*" } | select Id, ProcessName
 
@@ -23,4 +24,4 @@ else
     Write-Host "Stopping Chrome service"
     Stop-Process -Id $service.Id
 }
-
+#>
