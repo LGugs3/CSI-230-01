@@ -10,7 +10,7 @@ $scrapedPage = Invoke-WebRequest -TimeoutSec 10 http://10.0.17.15/ToBeScraped.ht
 #Deliv 3(11)
 #$scrapedPage.Links | select outerText, href
 
-$h2s = $scrapedPage.ParsedHtml.body.getElementsByTagName("h2") | select outerText
+#$h2s = $scrapedPage.ParsedHtml.body.getElementsByTagName("h2") | select outerText
 #Deliv 4(12)
 #$h2s
 
