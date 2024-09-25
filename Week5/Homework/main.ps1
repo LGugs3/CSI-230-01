@@ -11,7 +11,7 @@ $translatedTable = daysTranslator $table
 #Deliverable ii
 #$translatedTable | Where-Object {($_.Location -ilike "JOYC 302") -and ($_.Days -contains "Monday") } | `
 #                   Sort-Object "Time Start" | Format-Table "Time Start", "Time End", "Class Code"
-
+<#
 #Deliverable iii
 $ITSInstructors = $translatedTable | Where-Object { ($_."Class Code" -ilike "SYS*") -or `
                                                     ($_."Class Code" -ilike "NET*") -or `
@@ -19,5 +19,11 @@ $ITSInstructors = $translatedTable | Where-Object { ($_."Class Code" -ilike "SYS
                                                     ($_."Class Code" -ilike "FOR*") -or `
                                                     ($_."Class Code" -ilike "CSI*") -or `
                                                     ($_."Class Code" -ilike "DAT*") `
-                                                  } | Sort-Object Instructor -Unique | `
-                                                  Format-Table
+                                                  } | Sort-Object Instructor -Unique
+
+#$ITSInstructors | Format-Table Instructor
+#>
+
+#Deliverable iv
+#$translatedTable | where { $_.Instructor -in $ITSInstructors.Instructor } `
+#                 | Group-Object "Instructor" | Sort-Object Count -Descending | Format-Table Count, Name
