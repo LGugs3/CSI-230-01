@@ -1,4 +1,4 @@
-﻿. (Join-Path $PSScriptRoot String-Helper.ps1)
+. (Join-Path $PSScriptRoot String-Helper.ps1)
 
 
 <# ******************************

@@ -14,7 +14,7 @@ $scrapedPage = Invoke-WebRequest -TimeoutSec 10 http://10.0.17.15/ToBeScraped.ht
 #Deliv 4(12)
 #$h2s
 
-$div1s = $scrapedPage.ParsedHtml.body.getElementsByTagName("div") | where { `
-$_.getAttributeNode("class").Value -ilike "div-1" } | select innerText
+#$div1s = $scrapedPage.ParsedHtml.body.getElementsByTagName("div") | where { `
+#$_.getAttributeNode("class").Value -ilike "div-1" } | select innerText
 #Deliv 5(13)
 #$div1s
