@@ -3,8 +3,6 @@ function ApacheLogs1()
     $unformattedLogs = Get-Content C:\xampp\apache\logs\access.log
     $tableRecords = @()
 
-    #$unformattedLogs[-9]
-
     for($i = 0; $i -lt $unformattedLogs.Count; $i++)
     {
         $words = $unformattedLogs[$i].Split(" ");
@@ -22,7 +20,7 @@ function ApacheLogs1()
     }
     return $tableRecords | Where-Object {$_.IP -like "10.*" }
 }
-clear
+#clear
 
-$tableLogs = ApacheLogs1
-$tableLogs | Format-Table -AutoSize -Wrap
+#$tableLogs = ApacheLogs1
+#$tableLogs | Format-Table -AutoSize -Wrap

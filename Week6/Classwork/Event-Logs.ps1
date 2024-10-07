@@ -64,3 +64,11 @@ function getFailedLogins($timeBack){
 
     return $failedloginsTable
 } # End of function getFailedLogins
+
+function getAtRiskUsers($timeBack)
+{
+    $userLogins = getFailedLogins $daysBack
+
+    $failedLogins = $userLogins | Group-Object Event | Where-Object { $_.Count -ge 10 } |Sort-Object Count -Descending
+    return $failedLogins | Format-Table @{Name = "Failed Logins"; Expression={$_.Count}}, @{Name = "User"; Expression={$_.Group.User[0]}}
+}

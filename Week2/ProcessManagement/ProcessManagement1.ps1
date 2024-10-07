@@ -25,3 +25,19 @@ else
     Stop-Process -Id $service.Id
 }
 #>
+function goToWebAddress($address)
+{
+    $chromeExe = "C:\Program Files\Google\Chrome\Application\chrome.exe"
+    $service = Get-Process | Where-Object {$_.Name -ilike "*chrome*" } | select Id, ProcessName
+
+    if ($service -eq $null)
+    {
+        Write-Host "Starting Chrome Service"
+        Start-Process -FilePath $chromeExe -ArgumentList "--new-window $($address)"
+    }
+    else
+    {
+        Write-Host "Stopping Chrome service"
+        Stop-Process -Id $service.Id
+    }
+}

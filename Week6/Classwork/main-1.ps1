@@ -165,18 +165,12 @@ while($operation){
         Write-Host ($userLogins | Where-Object { $_.User -ilike "*$name"} | Format-Table | Out-String)
     }
 
+    #At Risk Users
     elseif($choice -eq 9)
     {
         $daysBack = Read-Host -Prompt "Enter number of days back to get"
-        $userLogins = getFailedLogins $daysBack
-
-        $failedLogins = $userLogins | Group-Object Event | Where-Object { $_.Count -ge 10 } |Sort-Object Count -Descending
-        $failedLogins | Format-Table Count, @{Name = "User"; Expression={$_.Group.User[0]}} | Out-String
+        getAtRiskUsers $daysBack | Out-String
     }
-    # TODO: Create another choice "List at Risk Users" that
-    #              - Lists all the users with more than 10 failed logins in the last <User Given> days.  
-    #                (You might need to create some failed logins to test)
-    #              - Do not forget to update prompt and option numbers
     
     else
     {
