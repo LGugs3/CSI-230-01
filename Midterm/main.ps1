@@ -6,12 +6,12 @@ $logFilePath = "C:\Users\champuser\Desktop\CSI-230-01\Midterm\access.log"
 
 $page = getPageByCom $url
 $comTable = getTable $page
+$formattedComTable = @()
 $formattedComTable = getRows $comTable
-$formattedComTable | Out-String
 
 $formattedApacheTable = parseApacheLogs $logFilePath
-$filteredApacheTable = filterLogsByPage($formattedApacheTable, $formattedComTable)
+$filteredApacheTable = filterLogsByPage $formattedApacheTable $formattedComTable
 
-$filteredApacheTable | Out-String
+$filteredApacheTable | Format-Table | Out-String
 
 $page.Quit()

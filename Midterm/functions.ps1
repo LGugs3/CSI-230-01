@@ -17,20 +17,20 @@ function getTable($page)
 
 function getRows($table)
 {
-    $headerRow = $table[0].getElementsByTagName("th")
-    $patternName = $headerRow[0].innerText.ToString()
-    $descName = $headerRow[1].innerText.ToString()
+    #$headerRow = $table[0].getElementsByTagName("th")
+    #$patternName = $headerRow[0].innerText.ToString()
+    #$descName = $headerRow[1].innerText.ToString()
     $formattedTable = @()
-    
-    for($i = 1; $i -le $table.length - 1; $i++)
+
+    for($i = 1; $i -le $table.Length - 1; $i++)
     {
         $row = $table[$i].getElementsByTagName("td")
-        $formattedTable += [pscustomobject] @{ $patternName = $row[0].innerText; `
-                                               $descName = $row[1].innerText; `
+        if($table[$i] -eq $null -or $row -eq "") {continue}
+        $formattedTable += [PSCustomObject] @{ "Pattern" = $row[0].innerText; `
+                                               "Description" = $row[1].innerText; `
                                              }
     }
-    
-    return $formattedTable | Format-Table
+    return $formattedTable
 }
 
 function parseApacheLogs($filePath)
@@ -38,11 +38,11 @@ function parseApacheLogs($filePath)
     $unformattedLogs = Get-Content $filePath
     $table = @()
 
-    for($i = 0; $i -lt $unformattedLogs.Count; $i++)
+    for($i = 0; $i -lt $unformattedLogs.Length; $i++)
     {
         $line = $unformattedLogs[$i].Split(" ")
 
-        $table += [pscustomobject]@{ "IP" = $line[0];
+        $table += [PSCustomObject]@{ "IP" = $line[0];
                                      "Time" = $line[3].Trim('[');
                                      "Method" = $line[5].Trim('"');
                                      "Page" = $line[6];
@@ -51,16 +51,16 @@ function parseApacheLogs($filePath)
                                      "Referrer" = $line[10];
                                    }
     }
-    return $table | Format-Table
+    return $table
 }
 
-function filterLogsByPage($logTable, [pscustomobject]$comparisonTable)
+function filterLogsByPage($logTable, $comparisonTable)
 {
-    $comparisonTable | Out-String
-    $testTable = @()
-    for($i = 0; $i -lt $comparisonTable.Count; $i++)
+    $filteredTable = @()
+    foreach($log in $logTable)
     {
-        $testTable += [pscustomobject] @{ "Description" = $comparisonTable[$i].Description; }
+        if(($comparisonTable.Pattern | % {$log.Page.contains($_)}) -contains $true) { $filteredTable += $log }
     }
-    #return $logTable.Page | Select-String $testTable | Format-Table
+    
+    return $filteredTable
 }
