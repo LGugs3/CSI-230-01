@@ -12,5 +12,5 @@ prefix=$1
 
 for i in {1..254}
 do
-	ping -c 1 $prefix.$i
+	ping -c 1 $prefix.$i | grep -q " 0% packet loss" &&  echo "$prefix.$i"
 done
