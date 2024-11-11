@@ -57,8 +57,8 @@ function getAvailableCourses()
 
  echo "Courses with open seats:"
  #cat "$courseFile" | cut -d';' -f1,4 | grep -i "$classCode" | grep -ve "-[[:digit:]]*$" -ve "0$" | sort -t';' -k2 -n | sed 's/;/ | /g'
-  output=$(awk -v code=$classCode -F ';' '{if (match($1, code) && $4 > 0) print $0}' courses.txt)
-  echo "$output" | sed 's/;/ | /g'
+ output=$(awk -v code=$classCode -F ';' '{if (match($1, code) && $4 > 0) print substr($0, 1, length($0)-1)}' courses.txt)
+ echo "$output" | sed 's/;/ | /g'
  echo ""
 }
 
