@@ -1,0 +1,7 @@
+To: liam.gugliotta@mymail.champlain.edu
+Subject: Failed Logins
+Nov 18 10-52-45 | xubuntu | password check failed for user (champuser)
+Nov 18 10-52-51 | xubuntu | password check failed for user (champuser)
+Nov 18 10-53-02 | xubuntu | password check failed for user (champuser)
+Nov 18 10-53-08 | xubuntu | password check failed for user (champuser)
+Nov 18 10-53-12 | xubuntu | password check failed for user (champuser)
