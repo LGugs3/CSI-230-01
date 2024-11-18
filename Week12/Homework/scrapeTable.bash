@@ -79,8 +79,9 @@ colOne=$(scrapeColumn "press")
 colTwo=$(scrapeColumn "temp")
 colThree=$(getDates)
 
-echo "$colOne, $colTwo, $colThree"
-
 fileName=$(combineTables $colOne $colTwo $colThree)
 
 cat "$fileName"
+
+#remove tmp files
+rm *.txt *.html
